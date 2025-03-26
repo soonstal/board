@@ -1,4 +1,4 @@
-export const ROUTES = {
+export let ROUTES = {
   HOME: '#/',
   LOGIN: '#/login',
   REGISTER: '#/register',
