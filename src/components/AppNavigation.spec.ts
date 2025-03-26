@@ -5,7 +5,7 @@ import AppNavigation from './AppNavigation.vue'
 
 describe('# AppNavigation', () => {
   it('should render Sign in and Sign up when user not logged', () => {
-    const { getByRole } = render(AppNavigation, renderOptions())
+    let { getByRole } = render(AppNavigation, renderOptions())
 
     expect(getByRole('link', { name: 'Home' })).toHaveTextContent('Home')
     expect(getByRole('link', { name: 'Sign in' })).toHaveTextContent('Sign in')
@@ -13,7 +13,7 @@ describe('# AppNavigation', () => {
   })
 
   it('should render xxx when user logged', () => {
-    const { getByRole } = render(AppNavigation, renderOptions({
+    let { getByRole } = render(AppNavigation, renderOptions({
       initialState: {
         user: { user: { username: 'username', email: '', token: '', bio: '', image: '' } },
       },
