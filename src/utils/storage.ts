@@ -11,7 +11,7 @@ export default class Storage<T = unknown> {
 
   get(): T | null {
     try {
-      const value = window[this.storageType].getItem(this.key) ?? ''
+      let value = window[this.storageType].getItem(this.key) ?? ''
       return JSON.parse(value) as T
     }
     catch {
@@ -20,7 +20,7 @@ export default class Storage<T = unknown> {
   }
 
   set(value: T): void {
-    const strValue = JSON.stringify(value)
+    let strValue = JSON.stringify(value)
     window[this.storageType].setItem(this.key, strValue)
   }
 
