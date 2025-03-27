@@ -10,12 +10,12 @@ interface UseAsync<T extends (...args: unknown[]) => unknown> {
 }
 
 export default function useAsync<T extends (...args: unknown[]) => unknown>(fn: T): UseAsync<T> {
-  const active: UseAsync<T>['active'] = ref(false)
+  let active: UseAsync<T>['active'] = ref(false)
 
-  const run: UseAsync<T>['run'] = async (...args) => {
+  let run: UseAsync<T>['run'] = async (...args) => {
     active.value = true
     try {
-      const result = await fn(...args)
+      let result = await fn(...args)
       return result as ReturnType<T>
     }
     catch (error) {
