@@ -7,12 +7,12 @@ import { renderOptions, setupMockServer } from 'src/utils/test/test.utils.ts'
 import EditArticle from './EditArticle.vue'
 
 describe('# EditArticle page', () => {
-  let server = setupMockServer()
+  const server = setupMockServer()
 
   it('should call create api when fill form and click submit button', async () => {
     server.use(['POST', '/api/articles', { article: { ...fixtures.article, slug: 'article-title' } }])
     vi.spyOn(router, 'push')
-    let { getByRole, getByPlaceholderText } = render(EditArticle, await renderOptions({
+    const { getByRole, getByPlaceholderText } = render(EditArticle, await renderOptions({
       router,
       initialRoute: '/articles',
     }))
@@ -24,7 +24,7 @@ describe('# EditArticle page', () => {
 
     await fireEvent.click(getByRole('button', { name: 'Publish Article' }))
 
-    let mockedRequest = await server.waitForRequest('POST', '/api/articles')
+    const mockedRequest = await server.waitForRequest('POST', '/api/articles')
 
     expect(router.push).toHaveBeenCalledWith({ name: 'article', params: { slug: 'article-title' } })
     expect(await mockedRequest.json()).toMatchInlineSnapshot(`
@@ -48,7 +48,7 @@ describe('# EditArticle page', () => {
       ['PUT', '/api/articles/*', { article: fixtures.article }],
     )
     vi.spyOn(router, 'push')
-    let { getByRole, getByPlaceholderText } = render(EditArticle, await renderOptions({
+    const { getByRole, getByPlaceholderText } = render(EditArticle, await renderOptions({
       router,
       initialRoute: { name: 'article', params: { slug: 'article-foo' } },
     }))
@@ -58,7 +58,7 @@ describe('# EditArticle page', () => {
 
     await fireEvent.click(getByRole('button', { name: 'Publish Article' }))
 
-    let mockedRequest = await server.waitForRequest('PUT', '/api/articles/article-foo')
+    const mockedRequest = await server.waitForRequest('PUT', '/api/articles/article-foo')
 
     expect(router.push).toHaveBeenCalledWith({ name: 'article', params: { slug: 'article-foo' } })
     expect(await mockedRequest.json()).toMatchInlineSnapshot(`
@@ -84,7 +84,7 @@ describe('# EditArticle page', () => {
       ['GET', '/api/articles/*', { article: fixtures.article }],
       ['PUT', '/api/articles/*', { article: fixtures.article }],
     )
-    let { getByRole, getByPlaceholderText } = render(EditArticle, await renderOptions({
+    const { getByRole, getByPlaceholderText } = render(EditArticle, await renderOptions({
       router,
       initialRoute: { name: 'article', params: { slug: 'article-foo' } },
     }))
@@ -95,7 +95,7 @@ describe('# EditArticle page', () => {
 
     await fireEvent.click(getByRole('button', { name: 'Publish Article' }))
 
-    let mockedRequest = await server.waitForRequest('PUT', '/api/articles/article-foo')
+    const mockedRequest = await server.waitForRequest('PUT', '/api/articles/article-foo')
 
     expect(await mockedRequest.json()).toMatchInlineSnapshot(`
       {
