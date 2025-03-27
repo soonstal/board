@@ -8,14 +8,14 @@ interface UseProfileProps {
 }
 
 export function useProfile({ username }: UseProfileProps) {
-  let profile = ref<Profile | null>(null)
+  const profile = ref<Profile | null>(null)
 
   async function fetchProfile(): Promise<void> {
     updateProfile(null)
     if (!username.value)
       return
 
-    let profileData = await api.profiles.getProfileByUsername(username.value).then(res => res.data.profile)
+    const profileData = await api.profiles.getProfileByUsername(username.value).then(res => res.data.profile)
     updateProfile(profileData)
   }
 
