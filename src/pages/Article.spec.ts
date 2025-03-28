@@ -5,13 +5,13 @@ import { renderOptions, setupMockServer } from 'src/utils/test/test.utils'
 import Article from './Article.vue'
 
 describe('# Article', () => {
-  const server = setupMockServer(
+  let server = setupMockServer(
     ['GET', '/api/articles/foo', { article: fixtures.article }],
     ['GET', '/api/articles/foo/comments', { comments: fixtures.articleComments }],
   )
 
   it('should render correctly', async () => {
-    const { container } = render(Article, await renderOptions({
+    let { container } = render(Article, await renderOptions({
       initialRoute: { name: 'article', params: { slug: 'foo' } },
     }))
 
