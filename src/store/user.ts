@@ -4,13 +4,13 @@ import { api } from 'src/services'
 import type { User } from 'src/services/api'
 import Storage from 'src/utils/storage'
 
-export const userStorage = new Storage<User>('user')
+export let userStorage = new Storage<User>('user')
 
-export const isAuthorized = (): boolean => !!userStorage.get()
+export let isAuthorized = (): boolean => !!userStorage.get()
 
-export const useUserStore = defineStore('user', () => {
-  const user = ref(userStorage.get())
-  const isAuthorized = computed(() => !!user.value)
+export let useUserStore = defineStore('user', () => {
+  let user = ref(userStorage.get())
+  let isAuthorized = computed(() => !!user.value)
 
   function updateUser(userData?: User | null) {
     if (userData) {
