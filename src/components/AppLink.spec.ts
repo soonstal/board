@@ -5,7 +5,7 @@ import AppLink from './AppLink.vue'
 
 describe('# AppLink', () => {
   it('should redirect to another page when click the link', async () => {
-    const { container, getByRole } = render(AppLink, renderOptions({
+    let { container, getByRole } = render(AppLink, renderOptions({
       props: { name: 'tag', params: { tag: 'foo' } },
       slots: { default: () => 'Go to Foo tag' },
     }))
